@@ -25,7 +25,7 @@ pipeline{
         
         stage('run data-generator') {
     	    agent {
-                docker {
+                dockerContainer {
                     image 'python:3.11'
                 }
             }
