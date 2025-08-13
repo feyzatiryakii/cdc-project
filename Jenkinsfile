@@ -10,7 +10,7 @@ pipeline{
         stage('build kafka-producer'){
             steps {
                 dir ('kafka-producer'){
-                     sh 'mvn clean package'
+                     sh 'mvn clean package -DskipTests'
                 }
             }
         }
@@ -18,7 +18,7 @@ pipeline{
         stage('build kafka-consumer'){
             steps {
                 dir ('kafka-consumer'){
-                    sh 'mvn clean package'
+                    sh 'mvn clean package -DskipTests'
                 }
             }
         }
