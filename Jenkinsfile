@@ -1,28 +1,40 @@
-pipeline{
-    
+pipeline {
     agent any
-    
-    tools{
-        maven 'maven3'
-    }
-    
-    stages{
-        stage('build kafka-producer'){
+
+    stages {
+        stage('Checkout') {
             steps {
-                dir ('kafka-producer'){
-                     sh 'mvn clean package -DskipTests'
-                }
+                git url: 'https://github.com/kullaniciadi/cdc-project.git', branch: 'main'
             }
         }
-        
-        stage('build kafka-consumer'){
+
+        stage('build Kafka-producer') {
             steps {
-                dir ('kafka-consumer'){
-                    sh 'mvn clean package -DskipTests'
+                dir('kafka-producer') {
+                    script {
+                        docker.build("cdc/kafka-producer")
+                    }
                 }
             }
         }
 
-      
+        stage('build Kafka-consumer') {
+            steps {
+                dir('kafka-consumer') {
+                    script {
+                        docker.build("cdc/kafka-consumer")
+                    }
+                }
+            }
+        }
+
+        stage('run containers') {
+            steps {
+                script {
+                    sh 'docker run -d --rm --name producer cdc/kafka-producer'
+                    sh 'docker run -d --rm --name consumer cdc/kafka-consumer'
+                }
+            }
+        }
     }
 }
