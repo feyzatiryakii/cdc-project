@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/kullaniciadi/cdc-project.git', branch: 'main'
+                git url: 'https://github.com/feyzatiryakii/cdc-project.git', branch: 'main'
             }
         }
 
