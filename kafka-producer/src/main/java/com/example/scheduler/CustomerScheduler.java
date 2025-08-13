@@ -9,7 +9,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 import java.util.List;
-
 /*
 belirli araliklar ile veri tabanini kontrol edip yeni customer varsa kafkaya gonderecek
  */
