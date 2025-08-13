@@ -23,16 +23,10 @@ pipeline{
             }
         }
 
-        stage('run data-generator') {
-    	    steps {
-               sh '''
-                   docker run --rm \
-                      -v $PWD:/app \
-                      -w /app \
-                      python:3.11 \
-                      python3 dataGenerator.py 5
-               '''
+        stage('build data-generator') {
+            steps {
+                sh 'python3 dataGenerator.py 5'
             }
-         }
+        }
     }
 }
