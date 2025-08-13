@@ -24,7 +24,7 @@ pipeline{
         }
 
         stage('run data-generator') {
-            agent {
+    	    agent {
                 dockerContainer('python:3.11')
             }
             steps {

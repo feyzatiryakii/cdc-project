@@ -39,6 +39,21 @@ def insertData(cursor, customer):
     cursor.execute(query, values)
 
 
+def run_limited_inserts(limit):
+    conn = connectdb()
+    cursor = conn.cursor()
+    try:
+        for i in range(limit):
+            customer = generateData()
+            insertData(cursor, customer)
+            conn.commit()
+            print(f"[{i+1}] Yeni customer eklendi: {customer}")
+            time.sleep(2)
+    finally:
+        cursor.close()
+        conn.close()    
+
+
 def run_infinite_inserts():
     conn = connectdb()                
     cursor = conn.cursor() 
