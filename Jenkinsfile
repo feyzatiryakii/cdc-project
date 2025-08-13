@@ -22,18 +22,13 @@ pipeline{
                 }
             }
         }
-        
-        stage('build data-generator') {
+
+        stage('run data-generator') {
             agent {
-                docker {
-                    image 'python:3.11'
-                }
+                dockerContainer('python:3.11')
             }
             steps {
-                // python script çalışma dizini doğru olmalı
-                dir('/workspace') {
-                    sh 'python3 dataGenerator.py'
-                }
+                sh 'python3 dataGenerator.py'
             }
         }
     }
