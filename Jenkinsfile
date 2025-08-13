@@ -12,7 +12,7 @@ pipeline {
             steps {
                 dir('kafka-producer') {
                     script {
-                        sh 'sudo docker build -t cdc-project/kafka-producer .'
+                        sh 'docker build -t cdc-project/kafka-producer .'
                     }
                 }
             }
@@ -22,7 +22,7 @@ pipeline {
             steps {
                 dir('kafka-consumer') {
                     script {
-                        sh 'sudo docker build -t cdc-project/kafka-consumer .'
+                        sh 'docker build -t cdc-project/kafka-consumer .'
                     }
                 }
             }
@@ -31,8 +31,8 @@ pipeline {
         stage('run containers') {
             steps {
                 script {
-                    sh 'sudo docker run -d --rm --name producer cdc-project/kafka-producer'
-                    sh 'sudo docker run -d --rm --name consumer cdc-project/kafka-consumer'
+                    sh 'docker run -d --rm --name producer cdc-project/kafka-producer'
+                    sh 'docker run -d --rm --name consumer cdc-project/kafka-consumer'
                 }
             }
         }
