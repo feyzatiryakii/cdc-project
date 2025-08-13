@@ -23,10 +23,10 @@ pipeline{
             }
         }
         
-        stage('build data-generator'){
-            steps{
-                sh 'python3 dataGenerator.py'
-            }
-        }
+        stage('Run data-generator') {
+    		docker.image('python:3.11').inside {
+        		sh 'python3 dataGenerator.py'
+    		}
+	}
     }
 }
