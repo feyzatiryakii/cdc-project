@@ -29,7 +29,6 @@ public class KafkaProducerService {
             String message = objectMapper.writeValueAsString(customer); //kafka string/byte mesajlari ile calistigi
                                                                         //icin dogrudan java nesnesi gondermiyoruz. customer-->string
 
-
             //mesaj gondermeyi asenkron yapiyoruz cunku vakit alabilir uyg calismaya devam etsin
             CompletableFuture<SendResult<String, String>> future = kafkaTemplate.send(TOPIC, customer.getId().toString(), message);
 
@@ -44,7 +43,6 @@ public class KafkaProducerService {
                             result.getRecordMetadata().offset());
                 }
             });
-
         } catch (Exception e) {
             log.error("Mesaj işlenirken hata oluştu: {}", e.getMessage(), e);
         }

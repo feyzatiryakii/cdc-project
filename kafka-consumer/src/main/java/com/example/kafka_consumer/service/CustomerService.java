@@ -26,20 +26,16 @@ public class CustomerService {
 
     public void processMessage(Customer customer) { //gelen nesneyi isleyip dosyaya yazacak
         try {
-            //burada klasör var mı die bakicam
             Files.createDirectories(filePath.getParent());
-
             //customerı json stringe çevir
             String json = objectMapper.writeValueAsString(customer);
 
-            // stringi dosyaya ekle
             Files.writeString(
                     filePath,
                     json + System.lineSeparator() ,
-                    StandardOpenOption.CREATE, //dosya yoksa olusturucak
-                    StandardOpenOption.APPEND //varsa sonuna eklicek
+                    StandardOpenOption.CREATE,
+                    StandardOpenOption.APPEND
             );
-
             logger.info("Customer dosyaya eklendi: {}", customer);
         } catch (JsonProcessingException e) {
             logger.error("JSON işlenirken hata oluştu: {}", e.getMessage(), e);

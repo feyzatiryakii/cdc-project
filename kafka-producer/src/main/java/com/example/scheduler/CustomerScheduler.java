@@ -20,12 +20,13 @@ public class CustomerScheduler {
     private final CustomerRepository customerRepository;
     private final KafkaProducerService kafkaProducerService;
 
-    private LocalDateTime lastRun = LocalDateTime.now().minusMinutes(400);
 
     public CustomerScheduler(CustomerRepository customerRepository, KafkaProducerService kafkaProducerService) {
         this.customerRepository = customerRepository;
         this.kafkaProducerService = kafkaProducerService;
     }
+
+    private LocalDateTime lastRun = LocalDateTime.now().minusMinutes(100);
 
     @Scheduled(fixedDelay = 10000)
     public void checkNewCustomersAndSend() {
@@ -46,6 +47,4 @@ public class CustomerScheduler {
         }
         lastRun = LocalDateTime.now(); //zamani guncelle
     }
-
-
 }

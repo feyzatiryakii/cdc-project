@@ -39,7 +39,6 @@ services:
   kafka-producer:
     build:
       context: ./kafka-producer
-    #ports olacak mi burda bi bak
     environment:
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/cdc_demo?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
